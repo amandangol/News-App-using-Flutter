@@ -8,6 +8,7 @@ import 'package:flutter_news_api_/models/article_model.dart';
 import 'package:flutter_news_api_/models/category_model.dart';
 import 'package:flutter_news_api_/views/article_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //get our categories list
   List<CategoryModel> categories = <CategoryModel>[];
+
+  //get our newslist first
   List<ArticleModel> articles = <ArticleModel>[];
   bool _loading = true;
 
@@ -32,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     News newsClass = News();
     await newsClass.getNews();
     articles = newsClass.news;
-
     setState(() {
       _loading = false;
     });
@@ -64,7 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _loading
           ? Center(
               child: Container(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
               ),
             )
           : SingleChildScrollView(
@@ -87,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    //blogs......
+                    //blogs news......
                     Container(
                       padding: EdgeInsets.only(top: 18),
                       child: ListView.builder(
@@ -101,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               url: articles[index].url,
                             )),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -153,6 +158,7 @@ class CategoryTile extends StatelessWidget {
   }
 }
 
+//creating template for news
 class BlogTile extends StatelessWidget {
   final imageUrl, title, desc, url;
   const BlogTile(
