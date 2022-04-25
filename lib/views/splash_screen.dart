@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 5000);
     return Timer(duration, route);
   }
 
@@ -78,9 +78,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           builder: (context) => const HomeScreen()));
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(3),
-                  color: Colors.yellow,
+                  padding: const EdgeInsets.all(4),
                   margin: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.circular(7)),
                   child: Text(
                     "Skip",
                     style: GoogleFonts.lato(
