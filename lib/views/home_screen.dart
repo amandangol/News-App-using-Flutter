@@ -7,8 +7,6 @@ import 'package:flutter_news_api_/helper/news.dart';
 import 'package:flutter_news_api_/models/article_model.dart';
 import 'package:flutter_news_api_/models/category_model.dart';
 import 'package:flutter_news_api_/views/article_view.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
               "Flutter",
               style: TextStyle(
@@ -65,21 +63,19 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
       ),
       body: _loading
-          ? Center(
-              child: Container(
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                ),
+          ? const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
               ),
             )
           : SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     //categories
 
-                    Container(
+                    SizedBox(
                       height: 70,
                       child: ListView.builder(
                         itemCount: categories.length,
@@ -94,11 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     //blogs news......
                     Container(
-                      padding: EdgeInsets.only(top: 18),
+                      padding: const EdgeInsets.only(top: 18),
                       child: ListView.builder(
                         itemCount: articles.length,
                         shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
+                        physics: const ClampingScrollPhysics(),
                         itemBuilder: ((context, index) => BlogTile(
                               imageUrl: articles[index].urlToImage,
                               title: articles[index].title,
@@ -124,9 +120,16 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      // onTap: () {
+      //   Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) =>
+      //             CategoryView(category: categoryName.toString().toLowerCase()),
+      //       ));
+      // },
       child: Container(
-        margin: EdgeInsets.only(right: 16),
+        margin: const EdgeInsets.only(right: 16),
         child: Stack(
           children: <Widget>[
             ClipRRect(
@@ -145,7 +148,7 @@ class CategoryTile extends StatelessWidget {
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
               child: Text(
                 categoryName,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
@@ -176,31 +179,34 @@ class BlogTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ArticleNews(),
+            builder: (context) => ArticleNews(
+              imageUrl: url,
+              blogUrl: url,
+            ),
           ),
         );
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 16),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(7),
               child: Image.network(imageUrl),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
               desc,
-              style: TextStyle(color: Colors.black54),
+              style: const TextStyle(color: Colors.black54),
             ),
           ],
         ),

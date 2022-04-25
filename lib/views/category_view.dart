@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api_/helper/data.dart';
+
 import 'package:flutter_news_api_/helper/news.dart';
 import 'package:flutter_news_api_/models/article_model.dart';
 import 'package:flutter_news_api_/views/home_screen.dart';
-
-import 'article_view.dart';
 
 class CategoryView extends StatefulWidget {
   final String category;
@@ -32,13 +30,14 @@ class _CategoryViewState extends State<CategoryView> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
               "Flutter",
               style: TextStyle(
@@ -56,8 +55,8 @@ class _CategoryViewState extends State<CategoryView> {
           Opacity(
             opacity: 0.0,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: const Icon(
                 Icons.arrow_back,
               ),
             ),
@@ -67,70 +66,28 @@ class _CategoryViewState extends State<CategoryView> {
         centerTitle: true,
       ),
       body: _loading
-          ? Center(
-              child: Container(
-                child: CircularProgressIndicator(),
+          ? const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
               ),
             )
           : SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                        padding: EdgeInsets.only(top: 16),
-                        child: ListView.builder(
-                          itemBuilder: ((context, index) {
-                            return BlogTile(
-                                imageUrl: articles[index].urlToImage,
-                                title: articles[index].title,
-                                desc: articles[index].description,
-                                url: articles[index].url);
-                          }),
-                        ))
-                  ],
-                ),
+              child: Column(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: ListView.builder(
+                        itemBuilder: ((context, index) {
+                          return BlogTile(
+                              imageUrl: articles[index].urlToImage,
+                              title: articles[index].title,
+                              desc: articles[index].description,
+                              url: articles[index].url);
+                        }),
+                      ))
+                ],
               ),
             ),
-    );
-  }
-}
-
-class CategoryTile extends StatelessWidget {
-  final String imageUrl, categoryName;
-  const CategoryTile(
-      {Key? key, required this.imageUrl, required this.categoryName})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CategoryView(
-              category: categoryName.toString().toLowerCase(),
-            ),
-          ),
-        );
-      },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 16),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(7),
-              child: Image.network(imageUrl),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            SizedBox(
-              height: 8,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

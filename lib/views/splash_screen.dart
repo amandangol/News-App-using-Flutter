@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -21,13 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 5);
+    var duration = const Duration(seconds: 5);
     return Timer(duration, route);
   }
 
   route() {
     Navigator.pushReplacement(
-        this.context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override
@@ -38,14 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              child: Image.asset(
-                "assets/images/news.png",
-                height: 150,
-                width: 150,
-              ),
+            Image.asset(
+              "assets/images/news.png",
+              height: 150,
+              width: 150,
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(
                 top: 20,
               ),
@@ -58,28 +57,35 @@ class _SplashScreenState extends State<SplashScreen> {
                     GoogleFonts.lato(fontSize: 40, fontWeight: FontWeight.w500),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 20),
             ),
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               backgroundColor: Colors.white,
               strokeWidth: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Container(
-              margin: EdgeInsets.only(top: 10, right: 40),
-              alignment: Alignment.bottomRight,
+              margin: const EdgeInsets.only(top: 30),
+              alignment: Alignment.center,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
                 },
-                child: Text(
-                  "Skip",
-                  style: GoogleFonts.lato(
-                      fontSize: 20, fontWeight: FontWeight.w800),
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  color: Colors.yellow,
+                  margin: const EdgeInsets.all(15),
+                  child: Text(
+                    "Skip",
+                    style: GoogleFonts.lato(
+                        fontSize: 20, fontWeight: FontWeight.w800),
+                  ),
                 ),
               ),
             )
